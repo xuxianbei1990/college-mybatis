@@ -1,0 +1,26 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: college-mybatis
+  datasource:
+    url: jdbc:mysql://120.76.191.123:3306/lkb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: scftest
+    password: scf@#test
+    driverClassName: com.mysql.jdbc.Driver
+    testWhileIdle: true
+    validationQuery: select 1
+    testOnBorrow: false
+    validationInterval: 1000
+    minIdle: 10
+    maxIdle: 15
+    maxActive: 8
+    initialSize: 8
+    testOnConnect: true
+    initSQL: select 1
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level: debug

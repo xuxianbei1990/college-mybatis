@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="college.mapper.OrderBuyerMapper">
+  <resultMap id="BaseResultMap" type="college.model.OrderBuyer">
+    <id column="forder_buyer_id" jdbcType="BIGINT" property="forderBuyerId" />
+    <result column="forder_no" jdbcType="VARCHAR" property="forderNo" />
+    <result column="fseller_id" jdbcType="INTEGER" property="fsellerId" />
+    <result column="fshop_name" jdbcType="VARCHAR" property="fshopName" />
+    <result column="fbuyer_id" jdbcType="INTEGER" property="fbuyerId" />
+    <result column="fbuyer_name" jdbcType="VARCHAR" property="fbuyerName" />
+    <result column="forder_payment_id" jdbcType="BIGINT" property="forderPaymentId" />
+    <result column="fgoods_cn_amount" jdbcType="BIGINT" property="fgoodsCnAmount" />
+    <result column="fgoods_tax_cn_amount" jdbcType="BIGINT" property="fgoodsTaxCnAmount" />
+    <result column="ffreight_cn_amount" jdbcType="BIGINT" property="ffreightCnAmount" />
+    <result column="fdiscount_cn_amount" jdbcType="BIGINT" property="fdiscountCnAmount" />
+    <result column="forder_cn_amount" jdbcType="BIGINT" property="forderCnAmount" />
+    <result column="fcurrency_name_en" jdbcType="VARCHAR" property="fcurrencyNameEn" />
+    <result column="fexchange_rate" jdbcType="INTEGER" property="fexchangeRate" />
+    <result column="forder_type" jdbcType="TINYINT" property="forderType" />
+    <result column="forder_status" jdbcType="TINYINT" property="forderStatus" />
+    <result column="fafter_sale_status" jdbcType="TINYINT" property="fafterSaleStatus" />
+    <result column="fpush_status" jdbcType="TINYINT" property="fpushStatus" />
+    <result column="ffinish_time" jdbcType="TIMESTAMP" property="ffinishTime" />
+    <result column="fpush_time" jdbcType="TIMESTAMP" property="fpushTime" />
+    <result column="fdelivery_time" jdbcType="TIMESTAMP" property="fdeliveryTime" />
+    <result column="flogistics_order" jdbcType="VARCHAR" property="flogisticsOrder" />
+    <result column="fcarriage_temp_id" jdbcType="INTEGER" property="fcarriageTempId" />
+    <result column="freceive_name" jdbcType="VARCHAR" property="freceiveName" />
+    <result column="freceive_province" jdbcType="INTEGER" property="freceiveProvince" />
+    <result column="freceive_city" jdbcType="INTEGER" property="freceiveCity" />
+    <result column="freceive_region" jdbcType="INTEGER" property="freceiveRegion" />
+    <result column="freceive_addr" jdbcType="VARCHAR" property="freceiveAddr" />
+    <result column="freceive_mobile" jdbcType="VARCHAR" property="freceiveMobile" />
+    <result column="freceive_addr_flag" jdbcType="TINYINT" property="freceiveAddrFlag" />
+    <result column="freceive_email" jdbcType="VARCHAR" property="freceiveEmail" />
+    <result column="forderer_id" jdbcType="INTEGER" property="fordererId" />
+    <result column="forderer_name" jdbcType="VARCHAR" property="fordererName" />
+    <result column="forderer_id_card" jdbcType="VARCHAR" property="fordererIdCard" />
+    <result column="ftake_delivery_time" jdbcType="TIMESTAMP" property="ftakeDeliveryTime" />
+    <result column="fleave_flight_number" jdbcType="VARCHAR" property="fleaveFlightNumber" />
+    <result column="fleave_time" jdbcType="TIMESTAMP" property="fleaveTime" />
+    <result column="fpayer_name" jdbcType="VARCHAR" property="fpayerName" />
+    <result column="fpayer_id_card" jdbcType="VARCHAR" property="fpayerIdCard" />
+    <result column="fpay_time" jdbcType="TIMESTAMP" property="fpayTime" />
+    <result column="forder_remark" jdbcType="VARCHAR" property="forderRemark" />
+    <result column="fcreate_time" jdbcType="TIMESTAMP" property="fcreateTime" />
+    <result column="fmodify_time" jdbcType="TIMESTAMP" property="fmodifyTime" />
+    <result column="ffreight_rule_id" jdbcType="INTEGER" property="ffreightRuleId" />
+    <result column="forder_origin" jdbcType="TINYINT" property="forderOrigin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    forder_buyer_id, forder_no, fseller_id, fshop_name, fbuyer_id, fbuyer_name, forder_payment_id, 
+    fgoods_cn_amount, fgoods_tax_cn_amount, ffreight_cn_amount, fdiscount_cn_amount, 
+    forder_cn_amount, fcurrency_name_en, fexchange_rate, forder_type, forder_status, 
+    fafter_sale_status, fpush_status, ffinish_time, fpush_time, fdelivery_time, flogistics_order, 
+    fcarriage_temp_id, freceive_name, freceive_province, freceive_city, freceive_region, 
+    freceive_addr, freceive_mobile, freceive_addr_flag, freceive_email, forderer_id, 
+    forderer_name, forderer_id_card, ftake_delivery_time, fleave_flight_number, fleave_time, 
+    fpayer_name, fpayer_id_card, fpay_time, forder_remark, fcreate_time, fmodify_time, 
+    ffreight_rule_id, forder_origin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_lkb_order_buyer
+    where forder_buyer_id = #{forderBuyerId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from t_lkb_order_buyer
+      where forder_buyer_id in (
+      <foreach collection="list" item="item" index="index" separator=",">
+          #{item,jdbcType=BIGINT}
+      </foreach>
+      )
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_lkb_order_buyer
+    where forder_buyer_id = #{forderBuyerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="college.model.OrderBuyer">
+    insert into t_lkb_order_buyer (forder_buyer_id, forder_no, fseller_id, 
+      fshop_name, fbuyer_id, fbuyer_name, 
+      forder_payment_id, fgoods_cn_amount, fgoods_tax_cn_amount, 
+      ffreight_cn_amount, fdiscount_cn_amount, forder_cn_amount, 
+      fcurrency_name_en, fexchange_rate, forder_type, 
+      forder_status, fafter_sale_status, fpush_status, 
+      ffinish_time, fpush_time, fdelivery_time, 
+      flogistics_order, fcarriage_temp_id, freceive_name, 
+      freceive_province, freceive_city, freceive_region, 
+      freceive_addr, freceive_mobile, freceive_addr_flag, 
+      freceive_email, forderer_id, forderer_name, 
+      forderer_id_card, ftake_delivery_time, fleave_flight_number, 
+      fleave_time, fpayer_name, fpayer_id_card, 
+      fpay_time, forder_remark, fcreate_time, 
+      fmodify_time, ffreight_rule_id, forder_origin
+      )
+    values (#{forderBuyerId,jdbcType=BIGINT}, #{forderNo,jdbcType=VARCHAR}, #{fsellerId,jdbcType=INTEGER}, 
+      #{fshopName,jdbcType=VARCHAR}, #{fbuyerId,jdbcType=INTEGER}, #{fbuyerName,jdbcType=VARCHAR}, 
+      #{forderPaymentId,jdbcType=BIGINT}, #{fgoodsCnAmount,jdbcType=BIGINT}, #{fgoodsTaxCnAmount,jdbcType=BIGINT}, 
+      #{ffreightCnAmount,jdbcType=BIGINT}, #{fdiscountCnAmount,jdbcType=BIGINT}, #{forderCnAmount,jdbcType=BIGINT}, 
+      #{fcurrencyNameEn,jdbcType=VARCHAR}, #{fexchangeRate,jdbcType=INTEGER}, #{forderType,jdbcType=TINYINT}, 
+      #{forderStatus,jdbcType=TINYINT}, #{fafterSaleStatus,jdbcType=TINYINT}, #{fpushStatus,jdbcType=TINYINT}, 
+      #{ffinishTime,jdbcType=TIMESTAMP}, #{fpushTime,jdbcType=TIMESTAMP}, #{fdeliveryTime,jdbcType=TIMESTAMP}, 
+      #{flogisticsOrder,jdbcType=VARCHAR}, #{fcarriageTempId,jdbcType=INTEGER}, #{freceiveName,jdbcType=VARCHAR}, 
+      #{freceiveProvince,jdbcType=INTEGER}, #{freceiveCity,jdbcType=INTEGER}, #{freceiveRegion,jdbcType=INTEGER}, 
+      #{freceiveAddr,jdbcType=VARCHAR}, #{freceiveMobile,jdbcType=VARCHAR}, #{freceiveAddrFlag,jdbcType=TINYINT}, 
+      #{freceiveEmail,jdbcType=VARCHAR}, #{fordererId,jdbcType=INTEGER}, #{fordererName,jdbcType=VARCHAR}, 
+      #{fordererIdCard,jdbcType=VARCHAR}, #{ftakeDeliveryTime,jdbcType=TIMESTAMP}, #{fleaveFlightNumber,jdbcType=VARCHAR}, 
+      #{fleaveTime,jdbcType=TIMESTAMP}, #{fpayerName,jdbcType=VARCHAR}, #{fpayerIdCard,jdbcType=VARCHAR}, 
+      #{fpayTime,jdbcType=TIMESTAMP}, #{forderRemark,jdbcType=VARCHAR}, #{fcreateTime,jdbcType=TIMESTAMP}, 
+      #{fmodifyTime,jdbcType=TIMESTAMP}, #{ffreightRuleId,jdbcType=INTEGER}, #{forderOrigin,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="college.model.OrderBuyer">
+    insert into t_lkb_order_buyer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="forderBuyerId != null">
+        forder_buyer_id,
+      </if>
+      <if test="forderNo != null">
+        forder_no,
+      </if>
+      <if test="fsellerId != null">
+        fseller_id,
+      </if>
+      <if test="fshopName != null">
+        fshop_name,
+      </if>
+      <if test="fbuyerId != null">
+        fbuyer_id,
+      </if>
+      <if test="fbuyerName != null">
+        fbuyer_name,
+      </if>
+      <if test="forderPaymentId != null">
+        forder_payment_id,
+      </if>
+      <if test="fgoodsCnAmount != null">
+        fgoods_cn_amount,
+      </if>
+      <if test="fgoodsTaxCnAmount != null">
+        fgoods_tax_cn_amount,
+      </if>
+      <if test="ffreightCnAmount != null">
+        ffreight_cn_amount,
+      </if>
+      <if test="fdiscountCnAmount != null">
+        fdiscount_cn_amount,
+      </if>
+      <if test="forderCnAmount != null">
+        forder_cn_amount,
+      </if>
+      <if test="fcurrencyNameEn != null">
+        fcurrency_name_en,
+      </if>
+      <if test="fexchangeRate != null">
+        fexchange_rate,
+      </if>
+      <if test="forderType != null">
+        forder_type,
+      </if>
+      <if test="forderStatus != null">
+        forder_status,
+      </if>
+      <if test="fafterSaleStatus != null">
+        fafter_sale_status,
+      </if>
+      <if test="fpushStatus != null">
+        fpush_status,
+      </if>
+      <if test="ffinishTime != null">
+        ffinish_time,
+      </if>
+      <if test="fpushTime != null">
+        fpush_time,
+      </if>
+      <if test="fdeliveryTime != null">
+        fdelivery_time,
+      </if>
+      <if test="flogisticsOrder != null">
+        flogistics_order,
+      </if>
+      <if test="fcarriageTempId != null">
+        fcarriage_temp_id,
+      </if>
+      <if test="freceiveName != null">
+        freceive_name,
+      </if>
+      <if test="freceiveProvince != null">
+        freceive_province,
+      </if>
+      <if test="freceiveCity != null">
+        freceive_city,
+      </if>
+      <if test="freceiveRegion != null">
+        freceive_region,
+      </if>
+      <if test="freceiveAddr != null">
+        freceive_addr,
+      </if>
+      <if test="freceiveMobile != null">
+        freceive_mobile,
+      </if>
+      <if test="freceiveAddrFlag != null">
+        freceive_addr_flag,
+      </if>
+      <if test="freceiveEmail != null">
+        freceive_email,
+      </if>
+      <if test="fordererId != null">
+        forderer_id,
+      </if>
+      <if test="fordererName != null">
+        forderer_name,
+      </if>
+      <if test="fordererIdCard != null">
+        forderer_id_card,
+      </if>
+      <if test="ftakeDeliveryTime != null">
+        ftake_delivery_time,
+      </if>
+      <if test="fleaveFlightNumber != null">
+        fleave_flight_number,
+      </if>
+      <if test="fleaveTime != null">
+        fleave_time,
+      </if>
+      <if test="fpayerName != null">
+        fpayer_name,
+      </if>
+      <if test="fpayerIdCard != null">
+        fpayer_id_card,
+      </if>
+      <if test="fpayTime != null">
+        fpay_time,
+      </if>
+      <if test="forderRemark != null">
+        forder_remark,
+      </if>
+      <if test="fcreateTime != null">
+        fcreate_time,
+      </if>
+      <if test="fmodifyTime != null">
+        fmodify_time,
+      </if>
+      <if test="ffreightRuleId != null">
+        ffreight_rule_id,
+      </if>
+      <if test="forderOrigin != null">
+        forder_origin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="forderBuyerId != null">
+        #{forderBuyerId,jdbcType=BIGINT},
+      </if>
+      <if test="forderNo != null">
+        #{forderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fsellerId != null">
+        #{fsellerId,jdbcType=INTEGER},
+      </if>
+      <if test="fshopName != null">
+        #{fshopName,jdbcType=VARCHAR},
+      </if>
+      <if test="fbuyerId != null">
+        #{fbuyerId,jdbcType=INTEGER},
+      </if>
+      <if test="fbuyerName != null">
+        #{fbuyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="forderPaymentId != null">
+        #{forderPaymentId,jdbcType=BIGINT},
+      </if>
+      <if test="fgoodsCnAmount != null">
+        #{fgoodsCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fgoodsTaxCnAmount != null">
+        #{fgoodsTaxCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="ffreightCnAmount != null">
+        #{ffreightCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fdiscountCnAmount != null">
+        #{fdiscountCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="forderCnAmount != null">
+        #{forderCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fcurrencyNameEn != null">
+        #{fcurrencyNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="fexchangeRate != null">
+        #{fexchangeRate,jdbcType=INTEGER},
+      </if>
+      <if test="forderType != null">
+        #{forderType,jdbcType=TINYINT},
+      </if>
+      <if test="forderStatus != null">
+        #{forderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fafterSaleStatus != null">
+        #{fafterSaleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fpushStatus != null">
+        #{fpushStatus,jdbcType=TINYINT},
+      </if>
+      <if test="ffinishTime != null">
+        #{ffinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpushTime != null">
+        #{fpushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fdeliveryTime != null">
+        #{fdeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flogisticsOrder != null">
+        #{flogisticsOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="fcarriageTempId != null">
+        #{fcarriageTempId,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveName != null">
+        #{freceiveName,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveProvince != null">
+        #{freceiveProvince,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveCity != null">
+        #{freceiveCity,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveRegion != null">
+        #{freceiveRegion,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveAddr != null">
+        #{freceiveAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveMobile != null">
+        #{freceiveMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveAddrFlag != null">
+        #{freceiveAddrFlag,jdbcType=TINYINT},
+      </if>
+      <if test="freceiveEmail != null">
+        #{freceiveEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fordererId != null">
+        #{fordererId,jdbcType=INTEGER},
+      </if>
+      <if test="fordererName != null">
+        #{fordererName,jdbcType=VARCHAR},
+      </if>
+      <if test="fordererIdCard != null">
+        #{fordererIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="ftakeDeliveryTime != null">
+        #{ftakeDeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fleaveFlightNumber != null">
+        #{fleaveFlightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fleaveTime != null">
+        #{fleaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpayerName != null">
+        #{fpayerName,jdbcType=VARCHAR},
+      </if>
+      <if test="fpayerIdCard != null">
+        #{fpayerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="fpayTime != null">
+        #{fpayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forderRemark != null">
+        #{forderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyTime != null">
+        #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ffreightRuleId != null">
+        #{ffreightRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="forderOrigin != null">
+        #{forderOrigin,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="college.model.OrderBuyer">
+    update t_lkb_order_buyer
+    <set>
+      <if test="forderNo != null">
+        forder_no = #{forderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fsellerId != null">
+        fseller_id = #{fsellerId,jdbcType=INTEGER},
+      </if>
+      <if test="fshopName != null">
+        fshop_name = #{fshopName,jdbcType=VARCHAR},
+      </if>
+      <if test="fbuyerId != null">
+        fbuyer_id = #{fbuyerId,jdbcType=INTEGER},
+      </if>
+      <if test="fbuyerName != null">
+        fbuyer_name = #{fbuyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="forderPaymentId != null">
+        forder_payment_id = #{forderPaymentId,jdbcType=BIGINT},
+      </if>
+      <if test="fgoodsCnAmount != null">
+        fgoods_cn_amount = #{fgoodsCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fgoodsTaxCnAmount != null">
+        fgoods_tax_cn_amount = #{fgoodsTaxCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="ffreightCnAmount != null">
+        ffreight_cn_amount = #{ffreightCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fdiscountCnAmount != null">
+        fdiscount_cn_amount = #{fdiscountCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="forderCnAmount != null">
+        forder_cn_amount = #{forderCnAmount,jdbcType=BIGINT},
+      </if>
+      <if test="fcurrencyNameEn != null">
+        fcurrency_name_en = #{fcurrencyNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="fexchangeRate != null">
+        fexchange_rate = #{fexchangeRate,jdbcType=INTEGER},
+      </if>
+      <if test="forderType != null">
+        forder_type = #{forderType,jdbcType=TINYINT},
+      </if>
+      <if test="forderStatus != null">
+        forder_status = #{forderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fafterSaleStatus != null">
+        fafter_sale_status = #{fafterSaleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fpushStatus != null">
+        fpush_status = #{fpushStatus,jdbcType=TINYINT},
+      </if>
+      <if test="ffinishTime != null">
+        ffinish_time = #{ffinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpushTime != null">
+        fpush_time = #{fpushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fdeliveryTime != null">
+        fdelivery_time = #{fdeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flogisticsOrder != null">
+        flogistics_order = #{flogisticsOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="fcarriageTempId != null">
+        fcarriage_temp_id = #{fcarriageTempId,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveName != null">
+        freceive_name = #{freceiveName,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveProvince != null">
+        freceive_province = #{freceiveProvince,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveCity != null">
+        freceive_city = #{freceiveCity,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveRegion != null">
+        freceive_region = #{freceiveRegion,jdbcType=INTEGER},
+      </if>
+      <if test="freceiveAddr != null">
+        freceive_addr = #{freceiveAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveMobile != null">
+        freceive_mobile = #{freceiveMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="freceiveAddrFlag != null">
+        freceive_addr_flag = #{freceiveAddrFlag,jdbcType=TINYINT},
+      </if>
+      <if test="freceiveEmail != null">
+        freceive_email = #{freceiveEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fordererId != null">
+        forderer_id = #{fordererId,jdbcType=INTEGER},
+      </if>
+      <if test="fordererName != null">
+        forderer_name = #{fordererName,jdbcType=VARCHAR},
+      </if>
+      <if test="fordererIdCard != null">
+        forderer_id_card = #{fordererIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="ftakeDeliveryTime != null">
+        ftake_delivery_time = #{ftakeDeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fleaveFlightNumber != null">
+        fleave_flight_number = #{fleaveFlightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fleaveTime != null">
+        fleave_time = #{fleaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpayerName != null">
+        fpayer_name = #{fpayerName,jdbcType=VARCHAR},
+      </if>
+      <if test="fpayerIdCard != null">
+        fpayer_id_card = #{fpayerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="fpayTime != null">
+        fpay_time = #{fpayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forderRemark != null">
+        forder_remark = #{forderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyTime != null">
+        fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ffreightRuleId != null">
+        ffreight_rule_id = #{ffreightRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="forderOrigin != null">
+        forder_origin = #{forderOrigin,jdbcType=TINYINT},
+      </if>
+    </set>
+    where forder_buyer_id = #{forderBuyerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="college.model.OrderBuyer">
+    update t_lkb_order_buyer
+    set forder_no = #{forderNo,jdbcType=VARCHAR},
+      fseller_id = #{fsellerId,jdbcType=INTEGER},
+      fshop_name = #{fshopName,jdbcType=VARCHAR},
+      fbuyer_id = #{fbuyerId,jdbcType=INTEGER},
+      fbuyer_name = #{fbuyerName,jdbcType=VARCHAR},
+      forder_payment_id = #{forderPaymentId,jdbcType=BIGINT},
+      fgoods_cn_amount = #{fgoodsCnAmount,jdbcType=BIGINT},
+      fgoods_tax_cn_amount = #{fgoodsTaxCnAmount,jdbcType=BIGINT},
+      ffreight_cn_amount = #{ffreightCnAmount,jdbcType=BIGINT},
+      fdiscount_cn_amount = #{fdiscountCnAmount,jdbcType=BIGINT},
+      forder_cn_amount = #{forderCnAmount,jdbcType=BIGINT},
+      fcurrency_name_en = #{fcurrencyNameEn,jdbcType=VARCHAR},
+      fexchange_rate = #{fexchangeRate,jdbcType=INTEGER},
+      forder_type = #{forderType,jdbcType=TINYINT},
+      forder_status = #{forderStatus,jdbcType=TINYINT},
+      fafter_sale_status = #{fafterSaleStatus,jdbcType=TINYINT},
+      fpush_status = #{fpushStatus,jdbcType=TINYINT},
+      ffinish_time = #{ffinishTime,jdbcType=TIMESTAMP},
+      fpush_time = #{fpushTime,jdbcType=TIMESTAMP},
+      fdelivery_time = #{fdeliveryTime,jdbcType=TIMESTAMP},
+      flogistics_order = #{flogisticsOrder,jdbcType=VARCHAR},
+      fcarriage_temp_id = #{fcarriageTempId,jdbcType=INTEGER},
+      freceive_name = #{freceiveName,jdbcType=VARCHAR},
+      freceive_province = #{freceiveProvince,jdbcType=INTEGER},
+      freceive_city = #{freceiveCity,jdbcType=INTEGER},
+      freceive_region = #{freceiveRegion,jdbcType=INTEGER},
+      freceive_addr = #{freceiveAddr,jdbcType=VARCHAR},
+      freceive_mobile = #{freceiveMobile,jdbcType=VARCHAR},
+      freceive_addr_flag = #{freceiveAddrFlag,jdbcType=TINYINT},
+      freceive_email = #{freceiveEmail,jdbcType=VARCHAR},
+      forderer_id = #{fordererId,jdbcType=INTEGER},
+      forderer_name = #{fordererName,jdbcType=VARCHAR},
+      forderer_id_card = #{fordererIdCard,jdbcType=VARCHAR},
+      ftake_delivery_time = #{ftakeDeliveryTime,jdbcType=TIMESTAMP},
+      fleave_flight_number = #{fleaveFlightNumber,jdbcType=VARCHAR},
+      fleave_time = #{fleaveTime,jdbcType=TIMESTAMP},
+      fpayer_name = #{fpayerName,jdbcType=VARCHAR},
+      fpayer_id_card = #{fpayerIdCard,jdbcType=VARCHAR},
+      fpay_time = #{fpayTime,jdbcType=TIMESTAMP},
+      forder_remark = #{forderRemark,jdbcType=VARCHAR},
+      fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      ffreight_rule_id = #{ffreightRuleId,jdbcType=INTEGER},
+      forder_origin = #{forderOrigin,jdbcType=TINYINT}
+    where forder_buyer_id = #{forderBuyerId,jdbcType=BIGINT}
+  </update>
+</mapper>

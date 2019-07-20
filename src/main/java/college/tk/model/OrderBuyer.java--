@@ -1,0 +1,42 @@
+package college.tk.model;
+
+import lombok.Data;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
+
+import javax.persistence.*;
+
+/**
+ * User: xuxianbei
+ * Date: 2019/7/17
+ * Time: 9:33
+ * Version:V1.0
+ */
+
+@Data
+@NameStyle(Style.camelhump)
+@Table(name = "t_lkb_order_buyer")
+public class OrderBuyer {
+    //商品订单表主键id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @Column(name = "forder_buyer_id")
+    private Long forderBuyerId;
+    //订单编号
+    @Column(name = "forder_no")
+    private String forderNo;
+    //店铺id
+    @Column(name = "fseller_id")
+    private Integer fsellerId;
+    //
+    @Column(name = "fshop_name")
+    private String fshopName;
+    @Column(name = "fbuyer_id")
+    private Integer fbuyerId;
+    @Column(name = "fbuyer_name")
+    private String fbuyerName;
+    @Column(name = "forder_payment_id")
+    private Long forderPaymentId;
+    @Column(name = "fgoods_cn_amount")
+    private Long fgoodsCnAmount;
+}

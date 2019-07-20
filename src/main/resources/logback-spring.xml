@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--包含Spring boot对logback日志的默认配置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!--定义日志文件存储地址   不要使用相对路径进行配置-->
+        <!--控制输出日志的配置-->
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- 全局变量 -->
+    <!--application.yml 传递参数，不能使用logback 自带的<property>标签 -->
+    <springProperty scope="context" name="LOG_FILE" source="logback.file"/>
+    <!--重写了Spring Boot框架 org/springframework/boot/logging/logback/file-appender.xml 配置-->
+    <appender name="TIME_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!--日志文件的部分名字-->
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件的切割的方式-->
+            <!--${LOG_FILE}表示.log文件的文件名  %i  表示这一天的第几个日志-->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--保留历史日志一个月的时间-->
+            <maxHistory>30</maxHistory>
+            <!--
+            Spring Boot默认情况下，日志文件10M时，会切分日志文件,这样设置日志文件会在100M时切分日志
+            -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+        </rollingPolicy>
+    </appender>
+    <logger name="com.kafka.ighack.Consumer" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="org.springframework.kafka.listener.KafkaMessageListenerContainer" level="off"/>
+    <logger name="org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer" level="off"/>
+    <logger name="org.apache.kafka" level="OFF"/>
+    <logger name="io.netty" level="OFF"/>
+    <logger name="com.lambdaworks.redis" level="OFF"/>
+    <!--日志的默认级别-->
+    <root level="DEBUG">
+        <!--控制台输出-->
+        <appender-ref ref="CONSOLE"/>
+        <!--日志文件中输出-->
+        <appender-ref ref="TIME_FILE"/>
+    </root>
+</configuration>

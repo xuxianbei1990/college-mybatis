@@ -1,0 +1,13 @@
+package college.tk.mapper;
+
+import college.tk.model.OrderBuyer;
+import tk.mybatis.mapper.common.Mapper;
+
+/**
+ * User: xuxianbei
+ * Date: 2019/7/17
+ * Time: 10:04
+ * Version:V1.0
+ */
+public interface OrderBuyerMapper extends Mapper<OrderBuyer> {
+}

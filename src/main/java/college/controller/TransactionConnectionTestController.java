@@ -27,17 +27,26 @@ public class TransactionConnectionTestController {
     TransactionConnectionTestService transactionConnectionTestService;
 
     @GetMapping("/connection/stress/test")
-    public String connectionStressTest(Integer connectTimes){
+    public String connectionStressTest(Integer connectTimes) {
         return transactionConnectionTestService.connectionStressTest(connectTimes);
     }
 
+    /**
+     * 结论添加Transactional 性能提升25%
+     */
     @GetMapping("/transaction/stress/test")
-    public String transactionStressTest(Integer connectTimes){
+    public String transactionStressTest(Integer connectTimes) {
         return transactionConnectionTestService.transactionStressTest(connectTimes);
     }
 
+    /**
+     * 优化sql 提升36倍左右
+     *
+     * @param connectTimes
+     * @return
+     */
     @GetMapping("/foreach/stress/test")
-    public String foreachStressTest(Integer connectTimes){
+    public String foreachStressTest(Integer connectTimes) {
         return transactionConnectionTestService.foreachStressTest(connectTimes);
     }
 

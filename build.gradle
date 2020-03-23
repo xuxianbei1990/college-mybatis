@@ -27,7 +27,7 @@ dependencies {
 	compile("com.github.pagehelper:pagehelper:5.1.2")
 //	compile 'tk.mybatis:mapper-spring-boot-starter:2.0.3'
 //	compile 'tk.mybatis:mapper:4.0.3'
-	compile 'org.projectlombok:lombok:1.18.6'
+	compile('org.projectlombok:lombok:1.18.8')
 	runtime 'mysql:mysql-connector-java'
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

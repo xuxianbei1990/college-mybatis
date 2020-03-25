@@ -39,8 +39,7 @@
   </resultMap>
 
   <select id="getUser" resultMap="userWithLazyProperties">
-    select * from users where id =
-    #{id}
+    select * from users where id = #{id}
   </select>
 
 </mapper>

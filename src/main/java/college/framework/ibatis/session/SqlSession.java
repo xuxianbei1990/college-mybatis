@@ -1,6 +1,9 @@
 package college.framework.ibatis.session;
 
+import org.apache.ibatis.session.RowBounds;
+
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * @author: xuxianbei
@@ -17,4 +20,10 @@ public interface SqlSession {
     <T> T getMapper(Class<T> type);
 
     void close();
+
+    <E> List<E> selectList(String statement, Object parameter);
+
+    public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds);
+
+    <T> T selectOne(String statement, Object parameter);
 }

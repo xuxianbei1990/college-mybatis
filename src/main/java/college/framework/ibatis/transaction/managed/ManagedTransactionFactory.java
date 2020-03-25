@@ -17,6 +17,7 @@ public class ManagedTransactionFactory implements TransactionFactory {
 
     private boolean closeConnection = true;
 
+    //这个其实没有用到
     @Override
     public Transaction newTransaction(Connection conn) {
         return new ManagedTransaction(conn, closeConnection);
@@ -24,6 +25,6 @@ public class ManagedTransactionFactory implements TransactionFactory {
 
     @Override
     public Transaction newTransaction(DataSource dataSource, TransactionIsolationLevel level, boolean autoCommit) {
-        return null;
+        return new ManagedTransaction(dataSource, level, closeConnection);
     }
 }

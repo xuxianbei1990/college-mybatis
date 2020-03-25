@@ -19,7 +19,7 @@ public class MapperProxyFactory<T> {
 
     private final Class<T> mapperInterface;
 
-    //这个干吗？
+    //这个干吗？ 用来存储具体方法的 其实就是mapper的Select语句
     private final Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<Method, MapperMethod>();
 
     public MapperProxyFactory(Class<T> mapperInterface) {

@@ -1,5 +1,6 @@
 package college.framework.ibatis.transaction;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -11,4 +12,8 @@ import java.sql.SQLException;
 public interface Transaction {
 
     void close() throws SQLException;
+
+    Connection getConnection() throws SQLException;
+
+    Integer getTimeout() throws SQLException;
 }

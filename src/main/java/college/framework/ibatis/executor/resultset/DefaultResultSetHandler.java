@@ -2,6 +2,7 @@ package college.framework.ibatis.executor.resultset;
 
 import college.framework.ibatis.executor.Executor;
 import college.framework.ibatis.executor.parameter.ParameterHandler;
+import college.framework.ibatis.main.User;
 import college.framework.ibatis.mapping.BoundSql;
 import college.framework.ibatis.mapping.MappedStatement;
 import college.framework.ibatis.mapping.ResultMap;
@@ -36,27 +37,30 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     }
 
     @Override
-    public <E> List<E> handleResultSets(Statement stmt) throws SQLException {
+    public List<Object> handleResultSets(Statement stmt) throws SQLException {
         ResultSetWrapper rsw = getFirstResultSet(stmt);
         List<ResultMap> resultMaps = mappedStatement.getResultMaps();
         final List<Object> multipleResults = new ArrayList<Object>();
         int resultSetCount = 0;
 //        while (rsw != null) {
-//            ResultMap resultMap = resultMaps.get(resultSetCount);
         handleResultSet(rsw, null, multipleResults, null);
 //            rsw = getNextResultSet(stmt);
 //            cleanUpAfterHandlingResultSet();
         resultSetCount++;
 //        }
 
-        return null;
+        return multipleResults;
     }
 
     private void handleResultSet(ResultSetWrapper rsw, ResultMap resultMap, List<Object> multipleResults, ResultMapping parentMapping) throws SQLException {
         ResultSet resultSet = rsw.getResultSet();
         while (resultSet.next()) {
+            User user = new User();
             int i = resultSet.getInt("id");
             String value = resultSet.getString("name");
+            user.setId(i);
+            user.setName(value);
+            multipleResults.add(user);
             System.out.println(i + value);
         }
     }

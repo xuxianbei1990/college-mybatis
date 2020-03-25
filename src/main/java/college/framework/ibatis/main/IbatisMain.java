@@ -5,9 +5,6 @@ import college.framework.ibatis.session.Configuration;
 import college.framework.ibatis.session.SqlSession;
 import college.framework.ibatis.session.SqlSessionFactory;
 import college.framework.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.util.Assert;
-
-import java.util.Objects;
 
 /**
  * @author: xuxianbei
@@ -26,9 +23,10 @@ public class IbatisMain {
         try {
             Mapper mapper = sqlSession.getMapper(Mapper.class);
             User user = mapper.getUser(1);
-            Assert.isTrue(Objects.equals(0, user.setterCounter), "test");
-            Assert.isTrue(Objects.nonNull(user.getLazy1()));
-            Assert.isTrue(Objects.equals(1, user.setterCounter), "Should NOT load other lazy properties.");
+            System.out.println(user);
+//            Assert.isTrue(Objects.equals(0, user.setterCounter), "test");
+//            Assert.isTrue(Objects.nonNull(user.getLazy1()));
+//            Assert.isTrue(Objects.equals(1, user.setterCounter), "Should NOT load other lazy properties.");
         } finally {
             sqlSession.close();
         }

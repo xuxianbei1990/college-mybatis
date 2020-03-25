@@ -33,7 +33,7 @@ public class MapperMethod {
     }
 
     public Object execute(SqlSession sqlSession, Object[] args) {
-        Object result;
+        Object result = null;
         switch (command.getType()) {
             case SELECT:
                 if (method.returnsVoid) {
@@ -46,7 +46,7 @@ public class MapperMethod {
                 }
                 break;
         }
-        return null;
+        return result;
     }
 
     private <E> Object executeForMany(SqlSession sqlSession, Object[] args) {

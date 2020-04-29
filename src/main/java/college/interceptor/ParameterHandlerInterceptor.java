@@ -15,6 +15,7 @@ import java.util.Properties;
  * @description 拦截语句
  */
 @Intercepts(@Signature(type = ParameterHandler.class, method = "setParameters", args = {PreparedStatement.class}))
+//@Component
 public class ParameterHandlerInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

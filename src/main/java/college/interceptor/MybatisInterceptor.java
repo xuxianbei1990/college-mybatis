@@ -25,6 +25,7 @@ import java.util.Properties;
  */
 
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class})})
+//@Component
 public class MybatisInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
